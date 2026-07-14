@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  --cf-navy: #070f1c;
+  --cf-cyan: #00e5ff;
+  --cf-magenta: #ff2d95;
+
+  background:
+    radial-gradient(ellipse 70% 45% at 15% -10%, rgba(0, 229, 255, 0.16), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 95% 110%, rgba(255, 45, 149, 0.14), transparent 55%),
+    var(--cf-navy);
+  color: #e8e8e8;
+  font-family: 'Share Tech Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 1.5rem;
+}
+
+#board-root {
+  width: max-content;
+  max-width: 100%;
+}
+
+.settings-page {
+  max-width: 100%;
+}

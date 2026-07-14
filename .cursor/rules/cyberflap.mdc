@@ -1,0 +1,81 @@
+---
+description: CyberFlap project overview — architecture, conventions, and feature rules
+alwaysApply: true
+---
+
+# CyberFlap
+
+Virtual split-flap display web app. Own product — never refer to competing brands in code, comments, UI, or filenames.
+
+## Stack
+
+- Vite + React (JavaScript, not TypeScript)
+- React Router: `/` (board), `/settings`
+- No backend; persistence via `localStorage`
+
+## Layout (`src/`)
+
+- `components/` — `Board`, `Tile` (+ CSS)
+- `content/` — clock, weather, message, rainbow, rotation hooks, `config.js`
+- `pages/` — `BoardPage`, `SettingsPage`
+- `utils/` — `characters.js`, `board.js`, `useBoard.js`, `flipSound.js`
+
+## Board model
+
+- Fixed **22 columns**; dynamic **1–6 rows** (no empty trailing rows)
+- Wrap/truncate via `layoutText()` in `utils/board.js` (`MAX_ROWS = 6`)
+- Tile codes in `utils/characters.js`: blank `0`, A–Z `1–26`, digits `27–36` (1–9 then 0), punctuation, colors `63–70`
+- Helpers: `tileFromChar`, `tileFromColor`, `getFlipPath`, `FLIP_SEQUENCE`
+- Tile size: ~3:2, CSS `clamp` on `--tile-w` (viewport-based, not row-count-based)
+- Wider **row-gap** than column-gap; board height CSS-transitions (~260ms) on row count change
+
+## Flip animation
+
+- Each step uses CSS `rotateX` split-flap (top then bottom half), ~72ms (`FLIP_STEP_MS`)
+- Walk shortest path on `FLIP_SEQUENCE`; stagger starts per cell
+- Only tiles whose codes change should animate (`useBoard` skips equal boards)
+- Per flip **step** (not whole tile): `playFlipClick()` from `utils/flipSound.js`
+
+## Content rotation
+
+Order: `clock` → `weather` → `message` (`MODULE_ORDER`). Defaults in `content/config.js` (10s dwell, etc.).
+
+| Module | Behavior |
+|--------|----------|
+| clock | 1-line time with seconds; tick 1s while active |
+| weather | Open-Meteo + geolocation (SF fallback); refresh 15m |
+| message | Single custom string from `localStorage` |
+
+Manual override shows a sample ~10s then resumes. Playback: Previous / Pause-Resume / Next (Next/Prev reset auto-advance timer).
+
+## Rainbow mode (`cyberflap.rainbowMode`, default on)
+
+- Off or **1 row** → neutral tiles
+- **6 rows** → full spectrum, per-color ink OK
+- **2–5 rows** → colors from one contrast group so **all rows share one text color**
+  - Dark/white ink: red, violet
+  - Light/black ink: orange, yellow, green, blue
+  - 5 rows: light group + best extra for black ink (red), single black ink
+
+## Settings (`/settings`)
+
+- Custom message + Save → `cyberflap.customMessage`
+- Rainbow checkbox (persists immediately)
+- Live wrap preview via `getPreviewLines()` (and rainbow preview colors)
+
+## Sound
+
+- Web Audio only (no audio files): ~30ms filtered-noise clack
+- Cap concurrent voices / scale gain; unlock `AudioContext` on first user gesture
+- Mute: `cyberflap.mute` (default unmuted); toggle next to playback
+
+## Brand / UI
+
+- Wordmark + cyan/magenta/dark-navy look (Orbitron + Share Tech Mono)
+- Gear → settings; don’t let chrome overpower the board
+
+## Prompt history (canonical)
+
+1 scaffold → 2 grid/chars → 3 rebrand+flip → 4 content+rotation → 5 dynamic rows → 6 settings route → 7 row gap+rainbow → 8 ink groups+playback → 9 flip sound
+
+When extending: keep board codes/layout central, prefer `localStorage` for prefs, match existing visual language, number future prompts.

@@ -1,0 +1,190 @@
+.settings-page {
+  width: min(36rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settings-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.settings-page__back {
+  width: fit-content;
+  color: rgba(0, 229, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.settings-page__back:hover,
+.settings-page__back:focus-visible {
+  color: #00e5ff;
+  text-decoration: underline;
+}
+
+.settings-page__title {
+  margin: 0;
+  font-family: Orbitron, 'Segoe UI', sans-serif;
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: linear-gradient(100deg, #00e5ff 10%, #7cf 45%, #ff2d95 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.settings-page__lede {
+  margin: 0;
+  color: rgba(223, 249, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  max-width: 34em;
+}
+
+.settings-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.settings-page__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0, 229, 255, 0.75);
+}
+
+.settings-page__textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 10rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(0, 229, 255, 0.28);
+  border-radius: 0.3rem;
+  background: rgba(5, 11, 20, 0.85);
+  color: #dff9ff;
+  font: inherit;
+  line-height: 1.45;
+  caret-color: #00e5ff;
+}
+
+.settings-page__textarea:focus {
+  outline: 2px solid rgba(0, 229, 255, 0.55);
+  outline-offset: 1px;
+  border-color: rgba(0, 229, 255, 0.55);
+}
+
+.settings-page__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  color: #dff9ff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.settings-page__toggle input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: #00e5ff;
+  cursor: pointer;
+}
+
+.settings-page__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.settings-page__save {
+  appearance: none;
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  background: linear-gradient(180deg, rgba(0, 229, 255, 0.14), rgba(255, 45, 149, 0.1));
+  color: #dff9ff;
+  font-family: Orbitron, 'Segoe UI', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.settings-page__save:hover {
+  border-color: rgba(255, 45, 149, 0.65);
+}
+
+.settings-page__save:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 3px;
+}
+
+.settings-page__status {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ff2d95;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.settings-page__status.is-visible {
+  opacity: 1;
+}
+
+.settings-page__preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.settings-page__preview-title {
+  margin: 0;
+  font-family: Orbitron, 'Segoe UI', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(223, 249, 255, 0.9);
+}
+
+.settings-page__preview-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(223, 249, 255, 0.55);
+}
+
+.settings-page__preview-grid {
+  margin-top: 0.35rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 0.3rem;
+  background: #050b14;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.settings-page__preview-line {
+  margin: 0;
+  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+  color: #dff9ff;
+  white-space: pre;
+  width: calc(var(--preview-cols, 22) * 1ch);
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.15rem;
+}

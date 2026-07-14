@@ -1,0 +1,80 @@
+.board-page {
+  position: relative;
+  padding-bottom: 2.75rem;
+}
+
+.board-page__settings {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.25rem;
+  color: rgba(0, 229, 255, 0.55);
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.board-page__settings:hover,
+.board-page__settings:focus-visible {
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.08);
+}
+
+.board-page__settings:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 2px;
+}
+
+.board-page__gear {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.playback {
+  position: absolute;
+  right: -0.15rem;
+  bottom: -2.6rem;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.playback__button {
+  appearance: none;
+  border: 1px solid rgba(0, 229, 255, 0.22);
+  background: rgba(5, 11, 20, 0.55);
+  color: rgba(223, 249, 255, 0.65);
+  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.18rem;
+  cursor: pointer;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.playback__button:hover,
+.playback__button:focus-visible {
+  color: #dff9ff;
+  border-color: rgba(0, 229, 255, 0.5);
+  background: rgba(0, 229, 255, 0.08);
+}
+
+.playback__button:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 2px;
+}
+
+.playback__button[aria-pressed='true'] {
+  color: #ff2d95;
+  border-color: rgba(255, 45, 149, 0.45);
+}

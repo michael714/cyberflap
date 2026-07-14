@@ -1,0 +1,174 @@
+.tile {
+  --flip-ms: 72ms;
+  --tile-bg: #121820;
+  --tile-fg: #dff9ff;
+
+  width: var(--tile-w, 2.4rem);
+  height: var(--tile-h, calc(var(--tile-w, 2.4rem) * 2 / 3));
+  border-radius: 0.12rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--tile-bg);
+  perspective: 420px;
+  transform-style: preserve-3d;
+  box-shadow:
+    inset 0 1px 0 rgba(0, 229, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45);
+}
+
+.tile--rainbow {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.tile__half {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.tile__half--top {
+  top: 0;
+}
+
+.tile__half--bottom {
+  bottom: 0;
+}
+
+.tile__face {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--tile-h, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tile-bg, #121820);
+}
+
+.tile__half--top .tile__face,
+.tile__flap--top .tile__face {
+  top: 0;
+}
+
+.tile__half--bottom .tile__face,
+.tile__flap--bottom .tile__face {
+  bottom: 0;
+}
+
+.tile__face--char {
+  color: var(--tile-fg, #dff9ff);
+}
+
+.tile__face--blank {
+  background: #0e141d;
+}
+
+.tile--rainbow .tile__face--blank {
+  background: var(--tile-bg);
+}
+
+.tile__face--themed {
+  background: var(--tile-bg);
+}
+
+.tile__face--color {
+  background: var(--tile-color);
+}
+
+.tile__glyph {
+  font-family: 'Share Tech Mono', ui-monospace, monospace;
+  font-weight: 700;
+  font-size: calc(var(--tile-h) * 0.78);
+  line-height: 1;
+  letter-spacing: 0;
+  user-select: none;
+}
+
+.tile__flap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  z-index: 3;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.tile__flap--top {
+  top: 0;
+  transform-origin: bottom center;
+  animation: cf-flap-top var(--flip-ms) linear forwards;
+  z-index: 4;
+  background: var(--tile-bg, #121820);
+}
+
+.tile__flap--bottom {
+  bottom: 0;
+  transform-origin: top center;
+  transform: rotateX(90deg);
+  animation: cf-flap-bottom var(--flip-ms) linear forwards;
+  z-index: 3;
+  background: var(--tile-bg, #121820);
+}
+
+.tile__seam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 0 0.5px rgba(0, 229, 255, 0.12);
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes cf-flap-top {
+  0% {
+    transform: rotateX(0deg);
+    z-index: 4;
+  }
+  49% {
+    z-index: 4;
+  }
+  50% {
+    transform: rotateX(-90deg);
+    z-index: 2;
+  }
+  100% {
+    transform: rotateX(-90deg);
+    z-index: 2;
+  }
+}
+
+@keyframes cf-flap-bottom {
+  0% {
+    transform: rotateX(90deg);
+    z-index: 2;
+  }
+  50% {
+    transform: rotateX(90deg);
+    z-index: 2;
+  }
+  51% {
+    transform: rotateX(90deg);
+    z-index: 4;
+  }
+  100% {
+    transform: rotateX(0deg);
+    z-index: 4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile__flap--top,
+  .tile__flap--bottom {
+    animation: none;
+  }
+}

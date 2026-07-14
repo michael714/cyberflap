@@ -1,0 +1,49 @@
+.board {
+  --cf-frame: #0a1528;
+  --cf-frame-edge: #14304a;
+
+  /* Comfortable tile size; scales mildly with viewport, not with row count. */
+  --tile-w: clamp(1.15rem, 2.85vw, 2.55rem);
+  --tile-h: calc(var(--tile-w) * 2 / 3);
+  /* Keep tight in-row spacing; open up between rows for line separation. */
+  --tile-col-gap: clamp(0.1rem, 0.22vw, 0.16rem);
+  --tile-row-gap: clamp(0.38rem, 0.85vw, 0.62rem);
+  --grid-pad: clamp(0.12rem, 0.3vw, 0.2rem);
+  --board-rows: 1;
+  --board-resize-ms: 260ms;
+
+  background:
+    linear-gradient(160deg, #0d1b31 0%, #08111f 55%, #0a1424 100%);
+  border: 0.45rem solid var(--cf-frame);
+  border-radius: 0.4rem;
+  padding: 0.6rem;
+  box-shadow:
+    0 0 0 1px rgba(0, 229, 255, 0.4),
+    0 0 0 3px var(--cf-frame-edge),
+    0 0 0 4px rgba(255, 45, 149, 0.35),
+    0 22px 50px rgba(0, 0, 0, 0.55);
+}
+
+.board__grid {
+  display: grid;
+  row-gap: var(--tile-row-gap);
+  column-gap: var(--tile-col-gap);
+  background: #050b14;
+  padding: var(--grid-pad);
+  border: 1px solid rgba(0, 229, 255, 0.12);
+  overflow: hidden;
+  align-content: start;
+  justify-content: center;
+  height: calc(
+    (var(--board-rows) * var(--tile-h)) +
+      ((var(--board-rows) - 1) * var(--tile-row-gap)) +
+      (2 * var(--grid-pad))
+  );
+  transition: height var(--board-resize-ms) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board__grid {
+    transition: none;
+  }
+}

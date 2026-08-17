@@ -10,7 +10,8 @@ Virtual split-flap display web app. Own product — never refer to competing bra
 ## Stack
 
 - Vite + React (JavaScript, not TypeScript)
-- React Router: `/` (board), `/settings`
+- React Router: `/` (board), `/settings`; `basename` follows Vite `base` (`/cyberflap/` for GitHub Pages)
+- GitHub Pages: set `base: '/cyberflap/'` in `vite.config.js`; deploy the Vite `dist/` build via `.github/workflows/deploy.yml` (do not serve the repo root as Pages)
 - No backend; persistence via `localStorage`
 
 ## Layout (`src/`)

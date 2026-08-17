@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "CyberFlap — a virtual split-flap display",
+  "homepage": "https://michael714.github.io/cyberflap/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

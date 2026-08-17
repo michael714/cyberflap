@@ -10,9 +10,19 @@ Virtual split-flap display web app. Own product — never refer to competing bra
 ## Stack
 
 - Vite + React (JavaScript, not TypeScript)
-- React Router: `/` (board), `/settings`; `basename` follows Vite `base` (`/cyberflap/` for GitHub Pages)
-- GitHub Pages: set `base: '/cyberflap/'` in `vite.config.js`; deploy the Vite `dist/` build via `.github/workflows/deploy.yml` (do not serve the repo root as Pages)
+- React Router: `/` (board), `/settings`
+- `BrowserRouter` `basename` comes from `import.meta.env.BASE_URL` (unset locally; `/cyberflap` in production)
 - No backend; persistence via `localStorage`
+- Public repo: `https://github.com/michael714/cyberflap` (`origin` is SSH)
+
+## GitHub Pages
+
+Live site: `https://michael714.github.io/cyberflap/`
+
+- Pages **must** deploy the Vite `dist/` build via GitHub Actions (`.github/workflows/deploy.yml`), with Pages source set to **GitHub Actions** (`build_type: workflow`)
+- Do **not** serve the `main` branch root as Pages — that ships uncompiled JSX (`/src/main.jsx`) and a blank white page, and a leftover “pages build and deployment” job can overwrite a good Actions deploy
+- `vite.config.js`: `base` is `/` for `npm run dev`, `/cyberflap/` for `vite build`; after build, copy `dist/index.html` → `dist/404.html` so `/settings` deep links work
+- `package.json` `homepage` matches the Pages URL
 
 ## Layout (`src/`)
 

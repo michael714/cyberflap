@@ -67,7 +67,8 @@ Manual override (demo only) shows a sample ~10s then resumes. Playback Pause per
 ## Classroom agenda (`agenda.txt`)
 
 - File lives at the **repo root** (not `public/`). Replace it on github.com (pencil or **Add file → Upload files**); no git CLI required
-- Production fetches `raw.githubusercontent.com/.../agenda.txt` (GitHub API raw fallback); does **not** wait for a Vite/Pages rebuild. Poll every `AGENDA_POLL_MS` (2m). Keep last good deck if a poll fails
+- Production fetches the GitHub API (`contents/agenda.txt`, not the 5-minute raw CDN) so a github.com edit shows up on reload; raw URL is fallback. Poll every `AGENDA_POLL_MS` (2m). Keep last good deck if a poll fails
+- Live classroom URL is **GitHub Pages** (`https://michael714.github.io/cyberflap/`). Local `npm run dev` reads the local `agenda.txt`, not the GitHub file
 - Dev: Vite serves `/agenda.txt` from the repo root (`npm run dev` on **5173** only — extra ports leave hidden Cursor Browser tabs still playing flip sound)
 - Format: `=== LABEL` starts a page; body until the next header; lines before the first `===` are ignored; no headers → one page
 - **No page-count cap.** Each page is still **6 rows × 22 columns**; extra lines truncate (they do not spill to the next page). The `===` label is status chrome only, not a board row

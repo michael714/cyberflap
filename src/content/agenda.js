@@ -79,11 +79,11 @@ function emit() {
 
 function agendaUrl() {
   if (import.meta.env.DEV) return '/agenda.txt'
-  return `${AGENDA_GITHUB_URL}?t=${Date.now()}`
+  return `${AGENDA_GITHUB_API_URL}?ref=main`
 }
 
 async function readGithubApiText() {
-  const response = await fetch(AGENDA_GITHUB_API_URL, {
+  const response = await fetch(agendaUrl(), {
     cache: 'no-store',
     headers: { Accept: 'application/vnd.github.raw' },
   })
@@ -91,25 +91,37 @@ async function readGithubApiText() {
   return response.text()
 }
 
+async function readGithubRawText() {
+  const response = await fetch(`${AGENDA_GITHUB_URL}?t=${Date.now()}`, {
+    cache: 'no-store',
+  })
+  if (!response.ok) return null
+  return response.text()
+}
+
 async function readAgendaText() {
-  const primary = agendaUrl()
-  try {
-    const response = await fetch(primary, { cache: 'no-store' })
-    if (response.ok) return await response.text()
-  } catch {
-    // Fall through to the GitHub API (CORS / 404 / network).
-  }
-
-  if (!import.meta.env.DEV) {
+  if (import.meta.env.DEV) {
     try {
-      const fromApi = await readGithubApiText()
-      if (fromApi != null) return fromApi
+      const response = await fetch(agendaUrl(), { cache: 'no-store' })
+      if (response.ok) return await response.text()
     } catch {
-      // Unavailable — caller keeps the last good deck when possible.
+      // Local file missing or Vite not serving it.
     }
+    return null
   }
 
-  return null
+  try {
+    const fromApi = await readGithubApiText()
+    if (fromApi != null) return fromApi
+  } catch {
+    // Fall through to raw.githubusercontent.com.
+  }
+
+  try {
+    return await readGithubRawText()
+  } catch {
+    return null
+  }
 }
 
 async function refreshAgenda() {

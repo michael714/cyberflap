@@ -126,7 +126,7 @@ function SettingsPage() {
               ? 'Loading agenda.txt…'
               : agenda.status === 'unavailable'
                 ? 'No pages found. On github.com, edit or upload agenda.txt at the repo root, then refresh.'
-                : `How each page will wrap on the ${COLS}-column board. Replace agenda.txt on GitHub to update.`}
+                : `How each page will wrap on the ${COLS}-column board. Replace agenda.txt on GitHub to update. Display mode and rainbow apply immediately.`}
           </p>
           {agenda.pages.map((page, pageIndex) => (
             <article key={`${page.label}-${pageIndex}`} className="settings-page__agenda-page">
@@ -156,7 +156,7 @@ function SettingsPage() {
 
             <div className="settings-page__actions">
               <button type="submit" className="settings-page__save">
-                Save
+                Save message
               </button>
               <p
                 className={`settings-page__status${savedFlash ? ' is-visible' : ''}`}
@@ -174,12 +174,19 @@ function SettingsPage() {
               {previewLines.length >= MAX_ROWS ? ' (truncated at 6 rows)' : ''}.
               {rainbowMode && previewLines.length >= 2
                 ? ' Rainbow colors show on multi-row messages.'
-                : ''}
+                : ''}{' '}
+              Display mode and rainbow apply immediately; Save message stores the custom text.
             </p>
             <WrapPreview text={draft} rainbowMode={rainbowMode} />
           </section>
         </>
       )}
+
+      <div className="settings-page__footer">
+        <Link to="/" className="settings-page__back">
+          Back to board
+        </Link>
+      </div>
     </div>
   )
 }

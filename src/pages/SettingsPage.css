@@ -12,18 +12,34 @@
 }
 
 .settings-page__back {
+  display: inline-flex;
+  align-items: center;
   width: fit-content;
-  color: rgba(0, 229, 255, 0.85);
+  color: #dff9ff;
   text-decoration: none;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  font-family: Orbitron, 'Segoe UI', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(0, 229, 255, 0.45);
+  border-radius: 0.2rem;
+  background: linear-gradient(180deg, rgba(0, 229, 255, 0.14), rgba(255, 45, 149, 0.1));
 }
 
 .settings-page__back:hover,
 .settings-page__back:focus-visible {
-  color: #00e5ff;
-  text-decoration: underline;
+  color: #fff;
+  border-color: rgba(255, 45, 149, 0.65);
+}
+
+.settings-page__back:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 3px;
+}
+
+.settings-page__footer {
+  margin-top: 0.5rem;
 }
 
 .settings-page__title {

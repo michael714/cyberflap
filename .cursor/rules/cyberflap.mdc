@@ -87,9 +87,10 @@ Manual override (demo only) shows a sample ~10s then resumes. Playback Pause per
 
 ## Settings (`/settings`)
 
+- **Back to board** button at the top and bottom (returns to `/`). Do not rely on the browser Back button
 - Display mode radios (Demo / Classroom agenda) persist immediately
-- Demo: custom message + Save → `cyberflap.customMessage`; live wrap preview
-- Agenda: read-only preview of published `agenda.txt` pages
+- Demo: custom message + **Save message** → `cyberflap.customMessage`; live wrap preview
+- Agenda: read-only preview of published `agenda.txt` pages (no Save — GitHub is the source of truth)
 - Rainbow checkbox (persists immediately)
 
 ## Sound

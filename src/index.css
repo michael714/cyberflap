@@ -28,7 +28,7 @@ body {
 
 #root {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: 100svh;
   padding: 1.5rem;
@@ -37,6 +37,7 @@ body {
 #board-root {
   width: max-content;
   max-width: 100%;
+  margin-block: auto;
 }
 
 .settings-page {

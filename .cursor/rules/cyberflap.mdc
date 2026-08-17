@@ -27,7 +27,7 @@ Live site: `https://michael714.github.io/cyberflap/`
 ## Layout (`src/`)
 
 - `components/` — `Board`, `Tile` (+ CSS)
-- `content/` — clock, weather, message, rainbow, rotation hooks, `config.js`
+- `content/` — clock, weather, message, rainbow, agenda, display mode, rotation hooks, `config.js`
 - `pages/` — `BoardPage`, `SettingsPage`
 - `utils/` — `characters.js`, `board.js`, `useBoard.js`, `flipSound.js`
 
@@ -55,9 +55,25 @@ Order: `clock` → `weather` → `message` (`MODULE_ORDER`). Defaults in `conten
 |--------|----------|
 | clock | 1-line time with seconds; tick 1s while active |
 | weather | Open-Meteo + geolocation (SF fallback); refresh 15m |
-| message | Single custom string from `localStorage` |
+| message | Demo: custom string from `localStorage`. Agenda: current published page |
 
-Manual override shows a sample ~10s then resumes. Playback: Previous / Pause-Resume / Next (Next/Prev reset auto-advance timer).
+Display mode (`cyberflap.displayMode`, default `demo`):
+
+- **Demo** — clock, weather, custom message, Manual override; Next/Prev walk modules
+- **Agenda** — pages from repo-root `agenda.txt`; Next/Prev walk the deck (not auto-advanced); clock/weather still rotate with the **current page only**; Agenda-only holds that page
+
+Manual override (demo only) shows a sample ~10s then resumes. Playback Pause persists in agenda mode (`cyberflap.agendaPaused`). Next/Prev reset the auto-advance timer.
+
+## Classroom agenda (`agenda.txt`)
+
+- File lives at the **repo root** (not `public/`). Replace it on github.com (pencil or **Add file → Upload files**); no git CLI required
+- Production fetches `raw.githubusercontent.com/.../agenda.txt` (GitHub API raw fallback); does **not** wait for a Vite/Pages rebuild. Poll every `AGENDA_POLL_MS` (2m). Keep last good deck if a poll fails
+- Dev: Vite serves `/agenda.txt` from the repo root (`npm run dev` on **5173** only — extra ports leave hidden Cursor Browser tabs still playing flip sound)
+- Format: `=== LABEL` starts a page; body until the next header; lines before the first `===` are ignored; no headers → one page
+- **No page-count cap.** Each page is still **6 rows × 22 columns**; extra lines truncate (they do not spill to the next page). The `===` label is status chrome only, not a board row
+- Empty/missing file → on-board notice, not a blank page
+- Panel prefs: `cyberflap.agendaPageIndex`, `cyberflap.agendaOnly`, `cyberflap.agendaPaused`
+- Keyboard/clicker in agenda mode: Left/Right or PageUp/PageDown
 
 ## Rainbow mode (`cyberflap.rainbowMode`, default on)
 
@@ -70,9 +86,10 @@ Manual override shows a sample ~10s then resumes. Playback: Previous / Pause-Res
 
 ## Settings (`/settings`)
 
-- Custom message + Save → `cyberflap.customMessage`
+- Display mode radios (Demo / Classroom agenda) persist immediately
+- Demo: custom message + Save → `cyberflap.customMessage`; live wrap preview
+- Agenda: read-only preview of published `agenda.txt` pages
 - Rainbow checkbox (persists immediately)
-- Live wrap preview via `getPreviewLines()` (and rainbow preview colors)
 
 ## Sound
 
@@ -87,6 +104,6 @@ Manual override shows a sample ~10s then resumes. Playback: Previous / Pause-Res
 
 ## Prompt history (canonical)
 
-1 scaffold → 2 grid/chars → 3 rebrand+flip → 4 content+rotation → 5 dynamic rows → 6 settings route → 7 row gap+rainbow → 8 ink groups+playback → 9 flip sound
+1 scaffold → 2 grid/chars → 3 rebrand+flip → 4 content+rotation → 5 dynamic rows → 6 settings route → 7 row gap+rainbow → 8 ink groups+playback → 9 flip sound → 10 classroom agenda deck
 
 When extending: keep board codes/layout central, prefer `localStorage` for prefs, match existing visual language, number future prompts.

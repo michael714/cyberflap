@@ -98,6 +98,34 @@
   cursor: pointer;
 }
 
+.settings-page__modes {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.settings-page__modes .settings-page__toggle {
+  margin-top: 0;
+}
+
+.settings-page__agenda-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+}
+
+.settings-page__agenda-label {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 229, 255, 0.75);
+}
+
 .settings-page__actions {
   display: flex;
   align-items: center;

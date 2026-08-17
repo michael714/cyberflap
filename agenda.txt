@@ -1,0 +1,22 @@
+Replace this file on github.com to update the classroom agenda.
+Each page starts with === and a short label. Max 6 rows × 22 columns per page.
+
+=== WARM-UP
+DO NOW
+SOLVE 3 + 4
+BE READY TO SHARE
+
+=== LESSON
+TODAY WE
+COMPARE FRACTIONS
+
+=== EXIT
+ONE THING YOU
+LEARNED TODAY
+
+=== ONE MORE THING
+just wanted to see
+how many rows
+I could add to a page
+and whether I can have more
+than three pages

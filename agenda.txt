@@ -1,20 +1,14 @@
 Replace this file on github.com to update the classroom agenda.
 Each page starts with === and a short label. Max 6 rows × 22 columns per page.
 
-=== DO NOW
-smile
-life is good
-dont focus on the negative
+=== WELCOME
+welcome to statistics class!
 
-=== ONE MORE THING
-just wanted to see
-how many rows
-I could add to a page
-and whether I can have more
-than three pages
 
-=== WHY NOT 5?
-this one is to see
-whether my edits
-on github will show up
-on the activpanel
+=== CP1
+welcome to computer programming!
+
+=== 21st alg2
+welcome to Algebra 2
+for the
+21st century
